@@ -69,8 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             choices: [
                 { text: "Search the mines", nextScene: "mines" },
                 { text: "Ask around in the nearby town", nextScene: "town" }
-            ]
-        },
+},
         mines: {
             text: "Pedro stands before the mines, their black entrance swallowing all light. A chill runs down his spine as he steps inside. The air is thick with the scent of damp earth. Suddenly, a rock shifts behind him. He spins around, heart pounding. Could it be Zavier? Or something else lurking in the darkness? He must decide his next move carefully.",
             choices: [
@@ -169,6 +168,9 @@ document.addEventListener("DOMContentLoaded", function () {
             text: `<span style='${endingStyles.foundInjured}'>Pedro finds Zavier, injured but alive. He quickly calls for help, ensuring his brother survives. The nightmare is over, but scars remain.</span> <br><br> Pedro’s phone suddenly rings. A chilling voice says, 'Your mother has been taken. If you want to save her, follow the trail.' <br><br> <a href='https://vgames1.github.io/season2?character=pedro[game data]' target='_blank'>Click here for Season 2</a>`,
             choices: []
         }
+    };
+        },
+        // Add other scenes here...
     };
 
     // Custom alert function
