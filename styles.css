@@ -1,159 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedro's Adventure</title>
-    <link rel="icon" href="vgameswhite.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* General Styles */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: #e0e0e0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
 
-        .container {
-            text-align: center;
-            animation: fadeIn 2s ease-in-out;
-        }
+.container {
+    text-align: center;
+    animation: fadeIn 2s ease-in-out;
+}
 
-        .logo {
-            width: 150px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
-        }
+.logo {
+    width: 80px; /* Smaller logo */
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+}
 
-        #playButton {
-            background: #ff6f61;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
-        }
+h1 {
+    font-size: 48px;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ff6f61, 0 0 20px #ff6f61, 0 0 30px #ff6f61, 0 0 40px #ff6f61;
+    animation: glow 2s infinite alternate;
+}
 
-        #playButton:hover {
-            background: #ff3b2f;
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(255, 111, 97, 1);
-        }
+#playButton {
+    background: #ff6f61;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
+}
 
-        #gameContainer {
-            display: none;
-            text-align: center;
-            animation: slideIn 1s ease-in-out;
-        }
+#playButton:hover {
+    background: #ff3b2f;
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 111, 97, 1);
+}
 
-        #pedroImage {
-            width: 200px;
-            border-radius: 50%;
-            border: 5px solid #ff6f61;
-            box-shadow: 0 0 20px rgba(255, 111, 97, 0.7);
-            margin-bottom: 20px;
-        }
+#gameContainer {
+    display: none;
+    text-align: center;
+    animation: slideIn 1s ease-in-out;
+}
 
-        #story {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-        }
+#pedroImage {
+    width: 150px; /* Smaller character image */
+    border-radius: 50%;
+    border: 5px solid #ff6f61;
+    box-shadow: 0 0 20px rgba(255, 111, 97, 0.7);
+    margin-bottom: 20px;
+}
 
-        #choices {
-            margin-bottom: 20px;
-        }
+#story {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
 
-        #codeInput {
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #ff6f61;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            outline: none;
-            transition: all 0.3s ease;
-        }
+#choices {
+    margin-bottom: 20px;
+}
 
-        #codeInput:focus {
-            border-color: #ff3b2f;
-            box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
-        }
+#codeInput {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ff6f61;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    outline: none;
+    transition: all 0.3s ease;
+}
 
-        #submitCode {
-            background: #ff6f61;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-left: 10px;
-        }
+#codeInput:focus {
+    border-color: #ff3b2f;
+    box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
+}
 
-        #submitCode:hover {
-            background: #ff3b2f;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
-        }
+#submitCode {
+    background: #ff6f61;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
 
-        /* Glowing Title */
-        h1 {
-            font-size: 48px;
-            color: #ffffff;
-            text-shadow: 0 0 10px #ff6f61, 0 0 20px #ff6f61, 0 0 30px #ff6f61, 0 0 40px #ff6f61;
-            animation: glow 2s infinite alternate;
-        }
+#submitCode:hover {
+    background: #ff3b2f;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
+}
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
 
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #ff6f61, 0 0 20px #ff6f61, 0 0 30px #ff6f61, 0 0 40px #ff6f61; }
-            to { text-shadow: 0 0 20px #ff6f61, 0 0 30px #ff6f61, 0 0 40px #ff6f61, 0 0 50px #ff6f61; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <img src="vgameswhite.png" alt="VGames Logo" class="logo">
-        <h1>Pedro's Adventure</h1>
-        <button id="playButton">Play</button>
-    </div>
-    <div id="gameContainer">
-        <img id="pedroImage" src="Pedro Webster.webp" alt="Pedro Webster">
-        <div id="story"></div>
-        <div id="choices"></div>
-        <input type="text" id="codeInput" placeholder="Enter Encrypted Code">
-        <button id="submitCode">Submit</button>
-    </div>
-    <script src="pedro.js"></script>
-    <script>
-        // Show game container when Play button is clicked
-        document.getElementById('playButton').addEventListener('click', function() {
-            document.querySelector('.container').style.display = 'none';
-            document.getElementById('gameContainer').style.display = 'block';
-        });
-    </script>
-</body>
-</html>
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff6f61, 0 0 20px #ff6f61, 0 0 30px #ff6f61, 0 0 40px #ff6f61; }
+    to { text-shadow: 0 0 20px #ff6f61, 0 0 30px #ff6f61, 0 0 40px #ff6f61, 0 0 50px #ff6f61; }
+}
