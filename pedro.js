@@ -1,4 +1,3 @@
-// pedro.js
 document.addEventListener("DOMContentLoaded", function () {
     const storyContainer = document.getElementById("story");
     const choicesContainer = document.getElementById("choices");
@@ -17,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
             scene.choices.forEach(choice => {
                 const button = document.createElement("button");
                 button.innerText = choice.text;
+                button.className = "choiceButton"; // Add a class for styling
                 button.onclick = () => showScene(choice.nextScene);
                 choicesContainer.appendChild(button);
             });
@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             choices: [
                 { text: "Search the mines", nextScene: "mines" },
                 { text: "Ask around in the nearby town", nextScene: "town" }
+
             ]
         },
         mines: {
@@ -73,20 +74,71 @@ document.addEventListener("DOMContentLoaded", function () {
                 { text: "Try to carry him back", nextScene: "pedroInjured" }
             ]
         },
-        tavern: {
+         tavern: {
             text: "Inside the tavern, the air is thick with the scent of ale and tobacco. A bartender wipes a glass, eyeing Pedro warily. 'Looking for someone?' he asks. Pedro nods, and the bartender leans in. 'That kid got into trouble here. Someone dragged him out, bleeding. Said they were taking him to a shack outside town.' Pedro’s heart pounds. If he’s still alive, he doesn’t have much time.",
             choices: [
+                { text: "Ask more questions", nextScene: "bartenderTalk" },
                 { text: "Go to the shack", nextScene: "foundInjured" }
             ]
         },
+        bartenderTalk: {
+            text: "Pedro presses for more details. The bartender hesitates, then sighs. 'They were arguing about money. A gang might be involved. If you go, be careful.' He slips Pedro a small knife. 'You might need this.'",
+            choices: [
+                { text: "Head to the shack", nextScene: "shackApproach" },
+                { text: "Ask about the gang", nextScene: "gangInfo" }
+            ]
+        },
+        gangInfo: {
+            text: "The bartender lowers his voice. 'The Black Vultures. Dangerous group. If they took your brother, you’ll need more than luck to get him back.' He gestures toward a shadowy figure in the corner. 'That man knows their hideout.'",
+            choices: [
+                { text: "Approach the shadowy figure", nextScene: "shadowyFigure" },
+                { text: "Ignore him and go to the shack", nextScene: "shackApproach" }
+            ]
+        },
+        shadowyFigure: {
+            text: "The man smirks. 'You're looking for the Black Vultures? Dangerous path, my friend. But I can help… for a price.'",
+            choices: [
+                { text: "Offer money", nextScene: "bribeSuccess" },
+                { text: "Threaten him", nextScene: "fightScene" }
+            ]
+        },
+        bribeSuccess: {
+            text: "The man pockets the cash. 'Alright, listen closely. There’s a warehouse near the docks. If they have him, that’s where he’ll be.'",
+            choices: [
+                { text: "Go to the warehouse", nextScene: "warehouseSearch" }
+            ]
+        },
+        fightScene: {
+            text: "The man laughs. 'Brave, but foolish.' He lunges at Pedro. A struggle ensues, drawing attention. Guards rush in, forcing Pedro to flee.",
+            choices: [
+                { text: "Escape to the shack", nextScene: "shackApproach" },
+                { text: "Try hiding in the tavern", nextScene: "hideInTavern" }
+            ]
+        },
+        shackApproach: {
+            text: "Pedro reaches the shack. The door is ajar. Inside, he hears faint breathing. He pushes inside and finds Zavier tied up, bruised but alive.",
+            choices: [
+                { text: "Untie him quickly", nextScene: "foundInjured" },
+                { text: "Check for enemies", nextScene: "enemyAmbush" }
+            ]
+        },
+        enemyAmbush: {
+            text: "As Pedro reaches for Zavier, a figure emerges from the shadows. 'Not so fast,' a gruff voice sneers. A knife glints in the dim light.",
+            choices: [
+                { text: "Fight back", nextScene: "fightEnemy" },
+                { text: "Try to negotiate", nextScene: "negotiateEnemy" }
+            ]
+        },
         foundDead: {
-            text: `<span style='${endingStyles.foundDead}'>Pedro collapses as he finds Zavier’s lifeless body. The weight of grief crushes him. His journey ends in sorrow.</span>`,
+            text: `<span style='${endingStyles.foundDead}'>Pedro collapses as he finds Zavier’s lifeless body. The weight of grief crushes him. His journey ends in sorrow.</span>` ,
             choices: []
         },
         foundInjured: {
             text: `<span style='${endingStyles.foundInjured}'>Pedro finds Zavier, injured but alive. He quickly calls for help, ensuring his brother survives. The nightmare is over, but scars remain.</span> <br><br> Pedro’s phone suddenly rings. A chilling voice says, 'Your mother has been taken. If you want to save her, follow the trail.' <br><br> <a href='https://vgames1.github.io/season2?character=pedro[game data]' target='_blank'>Click here for Season 2</a>`,
             choices: []
         }
+
+        // Add other scenes here...
     };
 
     document.getElementById('playButton').addEventListener('click', function() {
@@ -97,7 +149,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById('submitCode').addEventListener('click', function() {
         const code = document.getElementById('codeInput').value;
-        if (code === "739572") {
+        const encryptedCode = btoa("876543"); // Encrypt the code
+        if (code === atob(encryptedCode)) { // Decrypt and compare
             customAlert("Correct Code! Proceeding to the next scene...");
         } else {
             customAlert("Incorrect Code! Try again.");
