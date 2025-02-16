@@ -172,40 +172,30 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Custom alert function
-    document.getElementById('submitCode').addEventListener('click', function() {
-        const code = document.getElementById('codeInput').value;
-        const encryptedCode = btoa("876543"); // Encrypt the code
-        if (code === atob(encryptedCode)) { // Decrypt and compare
-            customAlert("Correct Code! Proceeding to the next scene...");
-        } else {
-            customAlert("Incorrect Code! Try again.");
-        }
-    });
-
     function customAlert(message) {
-        const alertBox = document.createElement('div');
-        alertBox.style.position = 'fixed';
-        alertBox.style.top = '50%';
-        alertBox.style.left = '50%';
-        alertBox.style.transform = 'translate(-50%, -50%)';
-        alertBox.style.backgroundColor = '#fff';
-        alertBox.style.color = '#000';
-        alertBox.style.padding = '20px';
-        alertBox.style.borderRadius = '5px';
-        alertBox.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
-        alertBox.style.zIndex = '1000';
+        const alertBox = document.createElement("div");
+        alertBox.style.position = "fixed";
+        alertBox.style.top = "50%";
+        alertBox.style.left = "50%";
+        alertBox.style.transform = "translate(-50%, -50%)";
+        alertBox.style.backgroundColor = "#fff";
+        alertBox.style.color = "#000";
+        alertBox.style.padding = "20px";
+        alertBox.style.borderRadius = "5px";
+        alertBox.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+        alertBox.style.zIndex = "1000";
         alertBox.textContent = message;
 
-        const closeButton = document.createElement('button');
-        closeButton.textContent = 'OK';
-        closeButton.style.marginTop = '10px';
-        closeButton.style.padding = '5px 10px';
-        closeButton.style.backgroundColor = '#000';
-        closeButton.style.color = '#fff';
-        closeButton.style.border = 'none';
-        closeButton.style.borderRadius = '3px';
-        closeButton.style.cursor = 'pointer';
-        closeButton.addEventListener('click', function() {
+        const closeButton = document.createElement("button");
+        closeButton.textContent = "OK";
+        closeButton.style.marginTop = "10px";
+        closeButton.style.padding = "5px 10px";
+        closeButton.style.backgroundColor = "#000";
+        closeButton.style.color = "#fff";
+        closeButton.style.border = "none";
+        closeButton.style.borderRadius = "3px";
+        closeButton.style.cursor = "pointer";
+        closeButton.addEventListener("click", function () {
             document.body.removeChild(alertBox);
         });
 
