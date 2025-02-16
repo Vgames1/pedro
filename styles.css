@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedro's Adventure</title>
+    <link rel="icon" href="vgameswhite.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <img src="vgameswhite.png" alt="VGames Logo" class="logo">
+        <button id="playButton">Play</button>
+    </div>
+    <div id="gameContainer" style="display:none;">
+        <img id="pedroImage" src="Pedro Webster.webp" alt="Pedro Webster">
+        <div id="story"></div>
+        <div id="choices"></div>
+        <input type="text" id="codeInput" placeholder="Enter Encrypted Code">
+        <button id="submitCode">Submit</button>
+    </div>
+    <script src="pedro.js"></script>
+</body>
+</html>
