@@ -1,7 +1,40 @@
 document.addEventListener("DOMContentLoaded", function () {
     const storyContainer = document.getElementById("story");
     const choicesContainer = document.getElementById("choices");
+    const codeModal = document.getElementById("codeModal");
+    const closeModal = document.querySelector(".close");
 
+    // Show modal for code input
+    function showCodeModal() {
+        codeModal.style.display = "flex";
+    }
+
+    // Hide modal
+    closeModal.addEventListener("click", function () {
+        codeModal.style.display = "none";
+    });
+
+    // Handle code submission
+    document.getElementById("submitCode").addEventListener("click", function () {
+        const code = document.getElementById("codeInput").value;
+        const encryptedCode = btoa("876543"); // Encrypt the code
+        if (code === atob(encryptedCode)) { // Decrypt and compare
+            codeModal.style.display = "none";
+            customAlert("Correct Code! Proceeding to the next scene...");
+        } else {
+            customAlert("Incorrect Code! Try again.");
+        }
+    });
+
+    // Show game container when Play button is clicked
+    document.getElementById("playButton").addEventListener("click", function () {
+        document.querySelector(".container").style.display = "none";
+        document.getElementById("gameContainer").style.display = "flex";
+        showScene("start");
+        showCodeModal(); // Show code input modal
+    });
+
+    // Scene management
     function showScene(sceneKey) {
         const scene = scenes[sceneKey];
         if (!scene) {
@@ -16,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
             scene.choices.forEach(choice => {
                 const button = document.createElement("button");
                 button.innerText = choice.text;
-                button.className = "choiceButton"; // Add a class for styling
+                button.className = "choiceButton";
                 button.onclick = () => showScene(choice.nextScene);
                 choicesContainer.appendChild(button);
             });
@@ -36,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
             choices: [
                 { text: "Search the mines", nextScene: "mines" },
                 { text: "Ask around in the nearby town", nextScene: "town" }
-
             ]
         },
         mines: {
@@ -74,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { text: "Try to carry him back", nextScene: "pedroInjured" }
             ]
         },
-         tavern: {
+        tavern: {
             text: "Inside the tavern, the air is thick with the scent of ale and tobacco. A bartender wipes a glass, eyeing Pedro warily. 'Looking for someone?' he asks. Pedro nods, and the bartender leans in. 'That kid got into trouble here. Someone dragged him out, bleeding. Said they were taking him to a shack outside town.' Pedro’s heart pounds. If he’s still alive, he doesn’t have much time.",
             choices: [
                 { text: "Ask more questions", nextScene: "bartenderTalk" },
@@ -130,23 +162,16 @@ document.addEventListener("DOMContentLoaded", function () {
             ]
         },
         foundDead: {
-            text: `<span style='${endingStyles.foundDead}'>Pedro collapses as he finds Zavier’s lifeless body. The weight of grief crushes him. His journey ends in sorrow.</span>` ,
+            text: `<span style='${endingStyles.foundDead}'>Pedro collapses as he finds Zavier’s lifeless body. The weight of grief crushes him. His journey ends in sorrow.</span>`,
             choices: []
         },
         foundInjured: {
             text: `<span style='${endingStyles.foundInjured}'>Pedro finds Zavier, injured but alive. He quickly calls for help, ensuring his brother survives. The nightmare is over, but scars remain.</span> <br><br> Pedro’s phone suddenly rings. A chilling voice says, 'Your mother has been taken. If you want to save her, follow the trail.' <br><br> <a href='https://vgames1.github.io/season2?character=pedro[game data]' target='_blank'>Click here for Season 2</a>`,
             choices: []
         }
-
-        // Add other scenes here...
     };
 
-    document.getElementById('playButton').addEventListener('click', function() {
-        document.querySelector('.container').style.display = 'none';
-        document.getElementById('gameContainer').style.display = 'flex';
-        showScene("start");
-    });
-
+    // Custom alert function
     document.getElementById('submitCode').addEventListener('click', function() {
         const code = document.getElementById('codeInput').value;
         const encryptedCode = btoa("876543"); // Encrypt the code
